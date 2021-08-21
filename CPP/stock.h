@@ -5,7 +5,7 @@
 
     /*Key = the trades trade refrence as a string
     Value = a Trade object storing all infornation*/
-    
+
     using TradeContainer = std::map<std::string, Trade>;
 
     struct Trade{
@@ -21,9 +21,6 @@
 
         //The price at which the shares were traded (Not sure what currency but guessing pounds?)
         double price;
-
-        //Volume weighted average
-        double vwap;
     };
 
 
@@ -47,13 +44,15 @@ private:
 public:
     /*----Constructors----*/
     Stock() = default;
+
     Stock(const std::string& epic, std::string& isin);
 
     /*----Getters----*/
     std::string getEpic() const;
 
     std::string getISIN() const;
-    Trade getTrade(std::string) const;
+
+    Trade& getTrade(std::string trade_ref) const;
     
     //get the VWAP for all trades of this stock
     double getVWAP() const;

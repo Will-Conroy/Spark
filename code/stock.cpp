@@ -13,8 +13,11 @@ std::string Stock::getISIN() const{
     return this->isin;
 };
 
-Trade& Stock::getTrade(std::string trade_ref) const{
-    return this->trades.at(trade_ref);
+Trade Stock::getTrade(std::string trade_ref) const{
+    
+    Trade const trade = this->trades.at(trade_ref);
+    return  trade;
+    
 };
 
 
@@ -27,7 +30,7 @@ double Stock::getVWAP() const {
     for (auto const& [isan, trade] : this->trades)
     {
      numerator += trade.price * trade.quatity;
-     denominator += trade.qutity;
+     denominator += trade.quatity;
     }
 
     if(denominator == 0)
@@ -48,7 +51,7 @@ double Stock::getVWAP() const {
         {
             if(trade.trade_type == trade_type){
                 numerator += trade.price * trade.quatity;
-                denominator += trade.qutity;
+                denominator += trade.quatity;
 
             }
         }

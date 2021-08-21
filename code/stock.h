@@ -3,10 +3,7 @@
 #include <string>
 #include <map>
 
-    /*Key = the trades trade refrence as a string
-    Value = a Trade object storing all infornation*/
-
-    using TradeContainer = std::map<std::string, Trade>;
+    
 
     struct Trade{
         
@@ -22,6 +19,11 @@
         //The price at which the shares were traded (Not sure what currency but guessing pounds?)
         double price;
     };
+
+    /*Key = the trades trade refrence as a string
+    Value = a Trade object storing all infornation*/
+
+    using TradeContainer = std::map<std::string, Trade>;
 
 
 
@@ -52,7 +54,7 @@ public:
 
     std::string getISIN() const;
 
-    Trade& getTrade(std::string trade_ref) const;
+    Trade getTrade(std::string trade_ref) const;
     
     //get the VWAP for all trades of this stock
     double getVWAP() const;

@@ -1,0 +1,60 @@
+magicVWAP application
+The objectives are to design, document and code an application that reads a file of trades and displays information relating to the trades/VWAP.  The time allowed to complete the project will be a maximum of 3 days, after which time you will be required to present your work/application.
+
+Objective1
+Write a program to read the csv trade file and calculate the VWAP in two ways
+Per unique stock / trade type combination
+Per stock
+
+
+Objective 2
+Provide an option to save the above results in 2 new separate files, 1 for each data set, in a similar format to the input data
+
+
+Objective 3
+As per objective 2, but using a different data format (of your choice)
+
+
+Objective 4
+Provide a simple interface to be able to
+Allow selection(filtering) and input of an Epic
+Display the overall VWAP and the VWAP per trade type for that stock in an innovative way
+
+
+Objective 5
+What other data/calculations might be of interest apart from VWAP?
+
+
+Objective 6
+comment on any aspects of the data that strike you
+
+
+
+Definition of VWAP (Volume weighted average)
+The VWAP is simply the average price of stock, in a period of time, based on
+
+(total value of shares traded)
+---------------------------------------
+(total volume of shares traded)
+
+So, if you have 2 trades
+
+1000 shares at œ2.00
+4000 shares at œ2.50
+
+The VWAP is	
+
+(1000 * œ2.00) + (4000 * œ2.50)
+---------------------------------------
+(1000 + 4000)
+
+= œ2.40
+Description of fields
+
+Field	Description
+Epic	Short name for the stock
+ISIN	Long unique name for the stock
+Trade Ref	Unique code for each transaction
+Trade Type	The type of trade
+Quantity	The number of shares traded
+Price	The price at which the shares were traded

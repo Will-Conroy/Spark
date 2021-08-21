@@ -2,9 +2,34 @@
 #define STOCK_H_
 #include <string>
 #include <map>
-#include "trade.h"
+
+    /*Key = the trades trade refrence as a string
+    Value = a Trade object storing all infornation*/
+    
+    using TradeContainer = std::map<std::string, Trade>;
+
+    struct Trade{
+        
+        //Unique code for each transaction
+        std::string trade_ref;
+
+        //The type of trade
+        std::string trade_type;
+
+        //The number of shares traded
+        int quatity;
+
+        //The price at which the shares were traded (Not sure what currency but guessing pounds?)
+        double price;
+
+        //Volume weighted average
+        double vwap;
+    };
+
+
 
 class Stock {
+
 
 private:
     //Short name for the stock
@@ -13,18 +38,35 @@ private:
     //Long unique name for the stock
     std::string isin;
 
-    //Volume weighted average
-    double vwap;
-
     /*All trades of this stock
-    Key = the trades trade refrence as a string
-    Value = a Trade object storing all infornation*/
-    std::map<std::string, Trade> trades;
+    */
+    TradeContainer trades;
 
 
 
 public:
-  
+    /*----Constructors----*/
+    Stock() = default;
+    Stock(const std::string& epic, std::string& isin);
+
+    /*----Getters----*/
+    std::string getEpic() const;
+
+    std::string getISIN() const;
+    Trade getTrade(std::string) const;
+    
+    //get the VWAP for all trades of this stock
+    double getVWAP() const;
+
+    //get the VWAP for all trades of given type for this stock
+    double getVWAP(std::string trade_type) const;
+
+    /*----Setters---*/
+    void addTrade(std::string trade_ref, std::string trade_type, int quantity, double price);
+
+    /*----Overrides----
+    friend std::ostream& operator<<(std::ostream& os, const Stock& stock);
+    */
 
 };
 

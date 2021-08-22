@@ -5,6 +5,7 @@
 #include <map>
 #include "stock.h"
 #include "magicVWAP.h"
+#include "datasets.h"
 
 using StockContainer = std::map<std::string, Stock>;
 
@@ -17,7 +18,7 @@ class Stocks{
 
     public:
 
-        Stocks();
+        Stocks() = default;
 
 
         /*----Getters---*/
@@ -25,8 +26,8 @@ class Stocks{
 
         StockContainer& getStockByEPIC(std::string epic);
 
-        void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping& cols);  
-
+        void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols);  
+        std::string popStringFormCSVLine(std::string& line);
 };
 
 #endif

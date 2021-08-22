@@ -47,7 +47,7 @@ double Stock::getVWAP() const {
         double numerator = 0;
         int denominator = 0;
         
-        for (auto const& [isan, trade] : this->trades)
+        for (auto const& [type, trade] : this->trades)
         {
             if(trade.trade_type == trade_type){
                 numerator += trade.price * trade.quatity;

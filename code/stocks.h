@@ -28,6 +28,9 @@ class Stocks{
 
         void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols);  
         std::string popStringFormCSVLine(std::string& line);
+
+
+        
 };
 
 #endif

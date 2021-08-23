@@ -3,7 +3,9 @@
 
 /*----Getters---*/
 Stock& Stocks::getStock(std::string isin){
-    return this->stocks.at(isin);
+  
+  return this->stocks.at(isin);
+
 };
 
 StockContainer& Stocks::getStockByEPIC(std::string epic){
@@ -14,10 +16,12 @@ StockContainer& Stocks::getStockByEPIC(std::string epic){
         stockOut.insert({isan, stock});
       }
     }
-
+  
     return stockOut;
 
 };
+
+
 
 void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols){
   if(cols.size() < 3)
@@ -32,9 +36,30 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
     std::getline(is,line);
 
     while (std::getline(is, line)) {
-        std::cout << line << '\n';
-    }
+        //std::cout << line << '\n';
+        std::string epic = popStringFormCSVLine(line);
+        std::string isan = popStringFormCSVLine(line);
+        Stock stock;
+        
+        try{
+          stock = getStock(isan);
+        }
+        catch (const std::out_of_range& oor) {
+          stock = Stock(epic, isan);
+          stocks.insert({isan, stock});
+        }
+ 
 
+        Trade trade = {popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )};
+        getStock(isan).addTrade(trade);
+        //std::cout << stock.getTrades().size() << std::endl;
+        
+        
+    }
+    std::cout << stocks.size() << std::endl;
+    for(auto const& [isan, newStock] : stocks){
+      std::cout << newStock;
+    }
 };  
 
 std::string Stocks::popStringFormCSVLine(std::string& line){

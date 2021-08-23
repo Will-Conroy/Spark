@@ -55,6 +55,8 @@ public:
     std::string getISIN() const;
 
     Trade getTrade(std::string trade_ref) const;
+
+    TradeContainer getTrades() const;
     
     //get the VWAP for all trades of this stock
     double getVWAP() const;
@@ -64,10 +66,12 @@ public:
 
     /*----Setters---*/
     void addTrade(std::string trade_ref, std::string trade_type, int quantity, double price);
+    void addTrade(Trade trade);
 
-    /*----Overrides----
+    /*----Overrides----*/
     friend std::ostream& operator<<(std::ostream& os, const Stock& stock);
-    */
+    //friend std::ostream& operator<<(std::ostream& os, const Trade& trade);
+    
 
 };
 

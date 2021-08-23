@@ -1,5 +1,5 @@
 #include "stock.h"
-
+#include <iostream>
 
 
 Stock::Stock(const std::string& epic, std::string& isin): epic(epic), isin(isin){}
@@ -18,6 +18,10 @@ Trade Stock::getTrade(std::string trade_ref) const{
     Trade const trade = this->trades.at(trade_ref);
     return  trade;
     
+};
+
+TradeContainer Stock::getTrades() const{
+    return this->trades;
 };
 
 
@@ -69,4 +73,30 @@ double Stock::getVWAP() const {
     void Stock::addTrade(std::string trade_ref, std::string trade_type, int quantity, double price){
          this->trades.insert(std::pair<const std::string, Trade>(trade_ref, {trade_ref, trade_type, quantity, price}));
         
-    };   
+    };
+
+    void Stock::addTrade(Trade trade){
+         this->trades.insert(std::pair<const std::string, Trade>(trade.trade_ref, trade));
+    };  
+
+
+/*----Overrides----*/
+std::ostream& operator<<(std::ostream& os, const Stock& stock){
+    std::string divider = " | ";
+    std::string stockInfo = stock.getEpic() + divider + stock.getISIN() + divider;
+    os << stockInfo << stock.getTrades().size() << std::endl;
+    for(auto const& [type, trade] : stock.getTrades()){
+        os << stockInfo << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
+    }
+    
+};
+
+/*
+std::ostream& operator<<(std::ostream& os, const Trade& trade){
+    std::string divider = " | ";
+    os << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
+    
+};
+*/
+
+

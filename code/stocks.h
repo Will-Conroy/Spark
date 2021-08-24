@@ -27,7 +27,7 @@ class Stocks{
         /*----Getters---*/
         Stock& getStock(std::string isin);
 
-        StockContainer& getStockByEPIC(std::string epic);
+        StockContainer getStockByEPIC(std::string epic);
 
         void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols);  
         std::string popStringFormCSVLine(std::string& line);

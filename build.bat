@@ -11,6 +11,6 @@ COPY bin\magicVWAP2.exe bin\magicVWAP.exe
 :compile
 IF NOT EXIST %bin_dir% MKDIR %bin_dir%
 IF EXIST %executable% DEL %executable%
-g++ --std=c++14 -Wall %source_files% %main_file% -o %executable%
+g++ --std=c++17 -Wall %source_files% %main_file% -o %executable%
 
 :end

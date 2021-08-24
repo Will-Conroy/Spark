@@ -99,9 +99,3 @@ std::ostream& operator<<(std::ostream& os, const Stock& stock){
     }
     return os;
 };
-
-
-
-
-
-

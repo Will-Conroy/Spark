@@ -14,6 +14,7 @@ namespace MENU  {
             SAVE,
             JASON,
             CSV
+   
     };
 
     struct Option{
@@ -28,6 +29,7 @@ namespace MENU  {
         const std::string TITLE;
         const OptionMapings OPTIONS;
     };
+
 
     const Menu MAIN = {
         "Main menu",
@@ -52,6 +54,14 @@ namespace MENU  {
     const Menu MENUS[NUM_MENUS] = { MAIN,
                                     STORE
                                                 };
+
+    const std::string DIVIDER = " | ";
+
+
+
+    Option getOption(Menu menu, std::string input);
+
+
 }
 
 

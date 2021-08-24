@@ -8,8 +8,9 @@ Stock& Stocks::getStock(std::string isin){
 
 };
 
-StockContainer& Stocks::getStockByEPIC(std::string epic){
+StockContainer Stocks::getStockByEPIC(std::string epic){
   StockContainer stockOut;
+
   for (auto const& [isan, stock] : this->stocks)
     {
       if(stock.getEpic() == epic){

@@ -69,8 +69,10 @@ public:
     void addTrade(Trade trade);
 
     /*----Overrides----*/
+    friend std::ostream& operator<<(std::ostream& os, const Trade& trade);
     friend std::ostream& operator<<(std::ostream& os, const Stock& stock);
-    //friend std::ostream& operator<<(std::ostream& os, const Trade& trade);
+
+    
     
 
 };

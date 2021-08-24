@@ -50,8 +50,8 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
         }
  
 
-        Trade trade = {popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )};
-        getStock(isan).addTrade(trade);
+        
+        getStock(isan).addTrade({popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )});
         //std::cout << stock.getTrades().size() << std::endl;
         
         

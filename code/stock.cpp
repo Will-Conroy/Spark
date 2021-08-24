@@ -81,22 +81,27 @@ double Stock::getVWAP() const {
 
 
 /*----Overrides----*/
+
+
+std::ostream& operator<<(std::ostream& os, const Trade& trade){
+    std::string divider = " | ";
+    os << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
+    return os;
+};
+
+
 std::ostream& operator<<(std::ostream& os, const Stock& stock){
     std::string divider = " | ";
     std::string stockInfo = stock.getEpic() + divider + stock.getISIN() + divider;
     os << stockInfo << stock.getTrades().size() << std::endl;
     for(auto const& [type, trade] : stock.getTrades()){
-        os << stockInfo << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
+        os << trade;
     }
-    
+    return os;
 };
 
-/*
-std::ostream& operator<<(std::ostream& os, const Trade& trade){
-    std::string divider = " | ";
-    os << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
-    
-};
-*/
+
+
+
 
 

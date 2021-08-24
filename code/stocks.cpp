@@ -24,19 +24,14 @@ StockContainer& Stocks::getStockByEPIC(std::string epic){
 
 
 void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols){
-  if(cols.size() < 3)
-        throw std::out_of_range("Not enough columns");
-
     if(!(is.good()))
         throw (std::runtime_error("Failed to open file"));
 
-    //reading first line which is just the name of cols
-    //As coursework states that this should remain constant, throw away the line
     std::string line;
     std::getline(is,line);
 
     while (std::getline(is, line)) {
-        //std::cout << line << '\n';
+      
         std::string epic = popStringFormCSVLine(line);
         std::string isan = popStringFormCSVLine(line);
         Stock stock;
@@ -48,18 +43,14 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
           stock = Stock(epic, isan);
           stocks.insert({isan, stock});
         }
- 
 
-        
-        getStock(isan).addTrade({popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )});
-        //std::cout << stock.getTrades().size() << std::endl;
-        
-        
+        getStock(isan).addTrade({popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )}); 
     }
+    /*
     std::cout << stocks.size() << std::endl;
     for(auto const& [isan, newStock] : stocks){
       std::cout << newStock;
-    }
+    }*/
 };  
 
 std::string Stocks::popStringFormCSVLine(std::string& line){
@@ -77,4 +68,12 @@ std::string Stocks::popStringFormCSVLine(std::string& line){
       line = line.erase (0,pos+1);
 
       return out;
+  };
+
+
+ std::ostream& operator<<(std::ostream& os, const Stocks& stocks){
+    for(auto const& [isan, stock] : stocks.stocks){
+        os << stock << std::endl;
+    }
+    return os;
   };

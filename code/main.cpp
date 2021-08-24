@@ -5,18 +5,19 @@
 #include "datasets.h"
 
 
+
+
+
+
 int main() {
-    std::cout << "Running!\n";
+    std::cout << "Wecome to magicVWAP" << std::endl;
+
     Stocks stocks;
-  
-    const MAGIC_VWAP::SourceColumnMapping &cols = MAGIC_VWAP::InputFiles::MARKET_TRADE.COLS;
 
-    InputFile input("datasets/market_trades.csv");
-    stocks.popluateFormCSV(input.open(), cols);
+    populatedStocksFromCommandLine(stocks);
 
+    //std::cout << stocks << std::endl;
 
-
-
-
+    
     return 0;
 }

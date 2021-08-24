@@ -20,6 +20,9 @@ class Stocks{
 
         Stocks() = default;
 
+        /*----Override---*/
+        friend std::ostream& operator<<(std::ostream& os, const Stocks& stocks);
+
 
         /*----Getters---*/
         Stock& getStock(std::string isin);
@@ -28,6 +31,8 @@ class Stocks{
 
         void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols);  
         std::string popStringFormCSVLine(std::string& line);
+
+        
 
 
         

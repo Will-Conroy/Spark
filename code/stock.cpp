@@ -85,17 +85,17 @@ double Stock::getVWAP() const {
 
 std::ostream& operator<<(std::ostream& os, const Trade& trade){
     std::string divider = " | ";
-    os << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price) << std::endl;
+    os << trade.trade_ref << divider << trade.trade_type << divider << std::to_string(trade.quatity) << divider << std::to_string(trade.price);
     return os;
 };
 
 
 std::ostream& operator<<(std::ostream& os, const Stock& stock){
     std::string divider = " | ";
-    std::string stockInfo = stock.getEpic() + divider + stock.getISIN() + divider;
-    os << stockInfo << stock.getTrades().size() << std::endl;
+    std::string stockInfo = stock.getEpic() + divider + stock.getISIN() + divider ;
+    os << stockInfo << stock.getTrades().size() << divider << stock.getVWAP() << divider << std::endl;
     for(auto const& [type, trade] : stock.getTrades()){
-        os << trade;
+        os << trade << std::endl;
     }
     return os;
 };

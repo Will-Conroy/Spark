@@ -109,9 +109,9 @@ struct InputFileSource {
 namespace InputFiles {
 
 const InputFileSource MARKET_TRADE = {
-  "mark_trades",
+  "market_trades",
   "Mtrades",
-  "mark_trades.csv",
+  "market_trades.csv",
   MAGIC_VWAP::SourceDataType::TradeCSV,
   {
       {EPIC,        "epic"},
@@ -127,6 +127,8 @@ constexpr size_t NUM_DATASETS = 1;
 
 const InputFileSource DATASETS[NUM_DATASETS] = { MARKET_TRADE,
                                                 };
+
+const std::string DATASET_FILE_DIR = "datasets/";
 
 } // namespace InputFiles
 

@@ -3,7 +3,9 @@
 #include "datapath.h"
 #include "input.h"
 
+void mysoul (NULL)
 
+(a)void speaking to people
 
 void populatedStocksFromCommandLine(Stocks& stocks){
     

@@ -15,9 +15,10 @@ int main() {
     Stocks stocks;
 
     populatedStocksFromCommandLine(stocks);
+    
 
     //std::cout << stocks << std::endl;
-
+    mainMenu();
     
     return 0;
 }

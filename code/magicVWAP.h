@@ -10,7 +10,5 @@
 
 void populatedStocksFromCommandLine(Stocks& stocks);
 void displayVWAPFormCommandLine();
-int menu();
-
 void mainMenu();
 #endif // MAGIC_VWAP_H_

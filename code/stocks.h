@@ -15,7 +15,6 @@ class Stocks{
   private: 
     StockContainer stocks;
     
-
     public:
 
         Stocks() = default;
@@ -30,12 +29,7 @@ class Stocks{
         StockContainer getStockByEPIC(std::string epic);
 
         void popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols);  
-        std::string popStringFormCSVLine(std::string& line);
-
-        
-
-
-        
+        std::string popStringFormCSVLine(std::string& line);    
 };
 
 #endif

@@ -14,7 +14,6 @@ namespace MENU  {
             SAVE,
             JASON,
             CSV
-   
     };
 
     struct Option{
@@ -30,15 +29,14 @@ namespace MENU  {
         const OptionMapings OPTIONS;
     };
 
-
     const Menu MAIN = {
         "Main menu",
         {
-            {EXIT,     Option {"Exit",0,".."}},
-            {SEARCH,         Option {"Search",1,"?"}},
-            {CALCULATE_VWAP,    Option {"VWAP",2,"vwap"}},
+            {LOAD,  Option {"Load",4,"l"}},
             {SAVE,   Option {"Save",3,"s"}},
-            {LOAD,  Option {"Load",4,"l"}}
+            {CALCULATE_VWAP,    Option {"VWAP",2,"vwap"}},
+            {SEARCH,         Option {"Search",1,"?"}},
+            {EXIT,     Option {"Exit",0,".."}}
         }
     }; 
 
@@ -57,14 +55,6 @@ namespace MENU  {
 
     const std::string DIVIDER = " | ";
 
-
-
-    Option getOption(Menu menu, std::string input);
-
-
+    Options getOption(OptionMapings options, std::string input);
 }
-
-
-
-
 #endif // MENU_H_

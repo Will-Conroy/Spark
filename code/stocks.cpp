@@ -32,11 +32,12 @@ std::map<std::pair<const Stock&, std::string>, double> Stocks::getWVAPByTradeCom
 
   for (auto const& [isan, stock] : this->stocks)
   {
-      
+      /*
       for (auto const& [type, trades] :  stock.getTradesByTypes())
       {
           out.insert({{stock, type}, cacluateVWAP(trades)});
       }
+      */
   }
   return out;
 };

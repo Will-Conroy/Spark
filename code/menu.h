@@ -70,6 +70,7 @@ namespace MENU  {
             {EXIT,          Option {"Back",                 2,  ".."}},
             {TRADE_TYPE,    Option {"Per stock/trade type", 1,  "t"}},
             {ISIN,          Option {"Per stock",            0,  "s"}}
+        }
     };
 
     constexpr size_t NUM_MENUS = 4;

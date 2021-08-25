@@ -11,9 +11,12 @@
 
 void populatedStocksFromCommandLine(Stocks& stocks);
 void displayVWAPFromCommandLineByISIN(Stocks& stocks);
-
+void displayVWAPPerStock(Stocks& stocks);
+void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks);
 void mainMenu(Stocks& stocks);
 void searchMenu(Stocks& stocks);
 void vwapMenu(Stocks& stocks);
+
+
 
 #endif // MAGIC_VWAP_H_

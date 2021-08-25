@@ -45,6 +45,15 @@ void displayVWAPFromCommandLineByISIN(Stocks& stocks){
     std::cout << stocks.getStock(isin).getVWAP();
 };
 
+void displayVWAPPerStock(Stocks& stocks){
+    std::cout << " EPIC  |      ISIN      |#tr | VWAP" << std::endl;
+    std::cout << stocks;
+};
+
+void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks){
+    
+};
+
 
 
 
@@ -137,8 +146,7 @@ void vwapMenu(Stocks& stocks){
                 case MENU::TRADE_TYPE:
                    
                 case MENU::ISIN:
-                    std::cout << " EPIC  |      ISIN      |#tr | VWAP" << std::endl;
-                    std::cout << stocks;
+                    displayVWAPPerStock(stocks);
                     vwapMenu(stocks);
                     break;
                 default:

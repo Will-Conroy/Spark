@@ -25,6 +25,9 @@ class Stocks{
 
         /*----Getters---*/
         Stock& getStock(std::string isin);
+        const StockContainer& getStocks();
+
+       std::map<std::pair<const Stock&, std::string>, double> getWVAPByTradeComdo();
 
         StockContainer getStockByEPIC(std::string epic);
 

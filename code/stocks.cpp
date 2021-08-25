@@ -22,6 +22,27 @@ StockContainer Stocks::getStockByEPIC(std::string epic){
 
 };
 
+const StockContainer& Stocks::getStocks(){
+  const StockContainer& temp = this->stocks;
+  return temp;
+};
+
+std::map<std::pair<const Stock&, std::string>, double> Stocks::getWVAPByTradeComdo(){
+  std::map<std::pair<const Stock&, std::string>, double> out;
+  /*
+    const StockContainer& STOCKS = this->stocks;
+    for (auto const& y : STOCKS)
+    {
+        
+        for (auto const& x : y.second.getTradesByTypes())
+        {
+            out.insert({{y.second, x.first}, cacluateVWAP(x.second)});
+        }
+    }*/
+    return out;
+};
+
+
 
 
 void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols){

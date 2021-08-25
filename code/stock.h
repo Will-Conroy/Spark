@@ -25,7 +25,7 @@
 
     using TradeContainer = std::map<std::string, Trade>;
 
-
+    double cacluateVWAP(const TradeContainer& trades);
 
 class Stock {
 
@@ -57,12 +57,18 @@ public:
     Trade getTrade(std::string trade_ref) const;
 
     TradeContainer getTrades() const;
+
+    TradeContainer getTradesByType(std::string type) const;
     
     //get the VWAP for all trades of this stock
     double getVWAP() const;
 
     //get the VWAP for all trades of given type for this stock
     double getVWAP(std::string trade_type) const;
+
+    
+    std::map<const std::string, const TradeContainer&> getTradesByTypes();
+
 
     /*----Setters---*/
     void addTrade(std::string trade_ref, std::string trade_type, int quantity, double price);

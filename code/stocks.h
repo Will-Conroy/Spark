@@ -14,6 +14,7 @@ class Stocks{
 
   private: 
     StockContainer stocks;
+ 
     
     public:
 
@@ -21,13 +22,14 @@ class Stocks{
 
         /*----Override---*/
         friend std::ostream& operator<<(std::ostream& os, const Stocks& stocks);
+        
 
 
         /*----Getters---*/
         Stock& getStock(std::string isin);
         const StockContainer& getStocks();
 
-       std::map<std::pair<const Stock&, std::string>, double> getWVAPByTradeComdo();
+       std::map<std::pair<std::string, std::string>, double> getWVAPByTradeComdo();
 
         StockContainer getStockByEPIC(std::string epic);
 

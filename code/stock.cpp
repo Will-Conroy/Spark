@@ -94,8 +94,8 @@ std::ostream& operator<<(std::ostream& os, const Stock& stock){
     std::string divider = " | ";
     std::string stockInfo = stock.getEpic() + divider + stock.getISIN() + divider ;
     os << stockInfo << stock.getTrades().size() << divider << stock.getVWAP() << divider << std::endl;
-    for(auto const& [type, trade] : stock.getTrades()){
+    /*for(auto const& [type, trade] : stock.getTrades()){
         os << trade << std::endl;
-    }
+    }*/
     return os;
 };

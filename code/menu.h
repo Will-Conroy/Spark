@@ -84,5 +84,6 @@ namespace MENU  {
     const std::string DIVIDER = " | ";
 
     Options getOption(OptionMapings options, std::string input);
+    std::string getInputFromUser(Menu menu);
 }
 #endif // MENU_H_

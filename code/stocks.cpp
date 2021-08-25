@@ -73,7 +73,7 @@ std::string Stocks::popStringFormCSVLine(std::string& line){
 
 
  std::ostream& operator<<(std::ostream& os, const Stocks& stocks){
-    for(auto const& [isan, stock] : stocks.stocks){
+    for(auto const& [isin, stock] : stocks.stocks){
         os << stock << std::endl;
     }
     return os;

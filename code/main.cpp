@@ -16,7 +16,7 @@ int main() {
 
     populatedStocksFromCommandLine(stocks);
     
-    mainMenu();
-    
+    mainMenu(stocks);
+     
     return 0;
 }

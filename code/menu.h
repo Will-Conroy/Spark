@@ -9,11 +9,15 @@ namespace MENU  {
     enum Options {
             EXIT,
             SEARCH,
+            EPIC,
+            ISIN,
+            TRADE_TYPE,
             LOAD,
             CALCULATE_VWAP,
             SAVE,
             JASON,
-            CSV
+            CSV,
+            DISPLAY
     };
 
     struct Option{
@@ -32,25 +36,48 @@ namespace MENU  {
     const Menu MAIN = {
         "Main menu",
         {
-            {LOAD,  Option {"Load",4,"l"}},
-            {SAVE,   Option {"Save",3,"s"}},
-            {CALCULATE_VWAP,    Option {"VWAP",2,"vwap"}},
-            {SEARCH,         Option {"Search",1,"?"}},
-            {EXIT,     Option {"Exit",0,".."}}
+            {EXIT,            Option {"Exit",   3,  ".."}},
+            {LOAD,            Option {"Load",   2,  "l"}},
+            {CALCULATE_VWAP,  Option {"VWAP",   1,  "vwap"}},
+            {SEARCH,          Option {"Search", 0,  "?"}}
+
         }
     }; 
 
     const Menu STORE = {
         "Save menu",
         {
-            {EXIT,     Option {"Back",0,".."}},
+            {EXIT,           Option {"Back",    3   ,".."}},
+            {DISPLAY,        Option {"Display", 2   ,"d"}},
+            {CSV,            Option {"CSV",     1   ,"c"}},
+            {JASON,          Option {"JASON",   0   ,"j"}}
         }
     }; 
 
-    constexpr size_t NUM_MENUS = 2;
+    const Menu SEARCH_WVAP = {
+        "Search WVAP menu",
+        {
+            {EXIT,          Option {"Back",         3,  ".."}},
+            {EPIC,          Option {"EPIC",         2,  "e"}},
+            {TRADE_TYPE,    Option {"ISIN & Type",  1,  "t"}},
+            {ISIN,          Option {"ISIN",         0,  "i"}}
+        }
+    };
+
+    const Menu VWAP = {
+        "Calculate VWAP menu",
+        {
+            {EXIT,          Option {"Back",                 2,  ".."}},
+            {TRADE_TYPE,    Option {"Per stock/trade type", 1,  "t"}},
+            {ISIN,          Option {"Per stock",            0,  "s"}}
+    };
+
+    constexpr size_t NUM_MENUS = 4;
 
     const Menu MENUS[NUM_MENUS] = { MAIN,
-                                    STORE
+                                    STORE,
+                                    SEARCH_WVAP,
+                                    VWAP
                                                 };
 
     const std::string DIVIDER = " | ";

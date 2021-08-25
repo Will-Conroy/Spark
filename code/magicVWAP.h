@@ -8,6 +8,7 @@
 #include "menu.h"
 #include <iostream>
 
+
 void populatedStocksFromCommandLine(Stocks& stocks);
 void displayVWAPFormCommandLine();
 void mainMenu();

@@ -16,8 +16,6 @@ int main() {
 
     populatedStocksFromCommandLine(stocks);
     
-
-    //std::cout << stocks << std::endl;
     mainMenu();
     
     return 0;

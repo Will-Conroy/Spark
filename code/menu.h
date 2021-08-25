@@ -1,7 +1,12 @@
 #ifndef MENU_H_
 #define MENU_H_
 #include <string>
-#include <unordered_map>
+
+/*
+
+  This file contains declarations for the menus. 
+ 
+ */
 
 
 namespace MENU  {

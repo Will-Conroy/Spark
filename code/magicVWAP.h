@@ -14,7 +14,9 @@ void displayVWAPFromCommandLineByISIN(Stocks& stocks);
 void displayVWAPPerStock(Stocks& stocks);
 void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks);
 void mainMenu(Stocks& stocks);
-void searchMenu(Stocks& stocks);
+void saveVWAPByStockToCSV(Stocks& stocks);
+void saveVWAPByISINTradeComboToCSV(Stocks& stocks);
+void saveMenu(Stocks& stocks, MAGIC_VWAP::InputFileSource fileSources);
 void vwapMenu(Stocks& stocks);
 
 

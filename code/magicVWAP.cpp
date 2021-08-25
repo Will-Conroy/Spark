@@ -1,8 +1,11 @@
 #include "magicVWAP.h"
-#include "datapath.h"
+#include "datasets.h"
 #include "input.h"
 #include "menu.h"
 #include <string>
+#include <fstream>
+
+
 
 void populatedStocksFromCommandLine(Stocks& stocks){
     
@@ -88,10 +91,6 @@ void mainMenu(Stocks& stocks){
                     vwapMenu(stocks);
                     break;
 
-                case MENU::SEARCH:
-                    searchMenu(stocks);
-                    break;
-
                 default:
                     throw(std::out_of_range("Missing menu option"));
                     break;
@@ -105,40 +104,6 @@ void mainMenu(Stocks& stocks){
     }while(!vaildInput);
 };
 
-
-void searchMenu(Stocks& stocks){
-
-    bool vaildInput = false;
-    do{   
-        std::string userInput = MENU::getInputFromUser(MENU::SEARCH_WVAP);
-     
-        try{
-             switch(MENU::getOption(MENU::SEARCH_WVAP.OPTIONS, userInput)) {
-                case MENU::EXIT:
-                    mainMenu(stocks);
-                    break;
-                case MENU::EPIC:
-                    
-                case MENU::TRADE_TYPE:
-                   
-                case MENU::ISIN:
-                    displayVWAPFromCommandLineByISIN(stocks);
-                    searchMenu(stocks);
-                    break;
-                 
-                default:
-                    throw(std::out_of_range("Missing menu option"));
-                    break;
-            }
-
-            vaildInput = true;
-        }catch(std::out_of_range& e){
-            std::cout << e.what() << std::endl;
-        }
-
-    }while(!vaildInput);
-
-}
 
 
 void vwapMenu(Stocks& stocks){
@@ -155,13 +120,49 @@ void vwapMenu(Stocks& stocks){
                     
                 case MENU::TRADE_TYPE:
                     displayVWAPromCommandLineByISINTradeCombo(stocks);
-                    vwapMenu(stocks);
+                    saveMenu(stocks, MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO);
                     break;
                    
                 case MENU::ISIN:
                     displayVWAPPerStock(stocks);
+                    saveMenu(stocks, MAGIC_VWAP::InputFiles::VWAP_BY_STOCK);
+                    break;
+                default:
+                    throw(std::out_of_range("Missing menu option"));
+                    break;
+            }
+
+            vaildInput = true;
+        }catch(std::out_of_range& e){
+            std::cout << e.what() << std::endl;
+        }
+    }while(!vaildInput);
+}
+
+
+
+void saveMenu(Stocks& stocks, MAGIC_VWAP::InputFileSource fileSources){
+
+    bool vaildInput = false;
+    do{   
+        std::string userInput = MENU::getInputFromUser(MENU::STORE);
+     
+        try{
+             switch(MENU::getOption(MENU::STORE.OPTIONS, userInput)) {
+                case MENU::EXIT:
+                    mainMenu(stocks);
+                    break;
+                    
+                case MENU::CSV:
+                    if(fileSources.FILE == MAGIC_VWAP::InputFiles::VWAP_BY_STOCK.FILE){
+                        saveVWAPByStockToCSV(stocks);  
+                    }else if(fileSources.FILE == MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.FILE){
+                        saveVWAPByISINTradeComboToCSV(stocks);
+                    }
                     vwapMenu(stocks);
                     break;
+                   
+                case MENU::JASON:
                 default:
                     throw(std::out_of_range("Missing menu option"));
                     break;
@@ -217,4 +218,34 @@ std::string MENU::autoDividers(int size, std::string leftText){
     }
     return out + MENU::DIVIDER;
 };
+
+
+void saveVWAPByStockToCSV(Stocks& stocks){
+    std::ofstream file;
+    file.open (MAGIC_VWAP::InputFiles::DATASET_FILE_DIR + MAGIC_VWAP::InputFiles::VWAP_BY_STOCK.FILE);
+    file << MAGIC_VWAP::InputFiles::VWAP_BY_STOCK.COLS.at(MAGIC_VWAP::SourceColumn::EPIC) << ','
+            << MAGIC_VWAP::InputFiles::VWAP_BY_STOCK.COLS.at(MAGIC_VWAP::SourceColumn::ISIN) << ','
+             << MAGIC_VWAP::InputFiles::VWAP_BY_STOCK.COLS.at(MAGIC_VWAP::SourceColumn::WVAP) << std::endl;
+
+    for(const auto& [isin, stock] : stocks.getStocks()){
+        file << stock.getEpic() << ',' << isin << ','<< stock.getVWAP() <<',' << std::endl;
+    }
+    file.close();
+};
+
+
+void saveVWAPByISINTradeComboToCSV(Stocks& stocks){
+    std::ofstream file;
+    file.open (MAGIC_VWAP::InputFiles::DATASET_FILE_DIR + MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.FILE);
+    file << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::EPIC) << ','
+            << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::ISIN) << ','
+             << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::WVAP) << std::endl;
+
+    for(const auto& [info, vwap]: stocks.getWVAPByTradeComdo()){
+        const auto& [isin, trade] = info;
+        file << isin << ','  <<  trade << ',' << vwap  << std::endl;
+    }
+    file.close();
+};
+
 

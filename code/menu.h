@@ -48,21 +48,11 @@ namespace MENU  {
         "Save menu",
         {
             {EXIT,           Option {"Back",    3   ,".."}},
-            {DISPLAY,        Option {"Display", 2   ,"d"}},
             {CSV,            Option {"CSV",     1   ,"c"}},
             {JASON,          Option {"JASON",   0   ,"j"}}
         }
     }; 
 
-    const Menu SEARCH_WVAP = {
-        "Search WVAP menu",
-        {
-            {EXIT,          Option {"Back",         3,  ".."}},
-            {EPIC,          Option {"EPIC",         2,  "e"}},
-            {TRADE_TYPE,    Option {"ISIN & Type",  1,  "t"}},
-            {ISIN,          Option {"ISIN",         0,  "i"}}
-        }
-    };
 
     const Menu VWAP = {
         "Calculate VWAP menu",
@@ -73,11 +63,10 @@ namespace MENU  {
         }
     };
 
-    constexpr size_t NUM_MENUS = 4;
+    constexpr size_t NUM_MENUS = 3;
 
     const Menu MENUS[NUM_MENUS] = { MAIN,
                                     STORE,
-                                    SEARCH_WVAP,
                                     VWAP
                                                 };
 
@@ -85,5 +74,6 @@ namespace MENU  {
 
     Options getOption(OptionMapings options, std::string input);
     std::string getInputFromUser(Menu menu);
+    std::string autoDividers(int size, std::string leftText);
 }
 #endif // MENU_H_

@@ -67,7 +67,8 @@ enum SourceColumn {
     TRADE_REF,
     TRADE_TYPE,
     QUANTITY,
-    PRICE
+    PRICE,
+    WVAP
 };
 
 /*
@@ -83,11 +84,7 @@ using SourceColumnMapping = std::unordered_map<SourceColumn, std::string>;
   datasets in the data directory.
 */
 struct InputFileSource {
-  // CODE is the string used in the program arguments
-  const std::string CODE;
 
-  // NAME is the name given to this dataset
-  const std::string NAME;
 
   // FILE is the name of the file in the datasets directory
   const std::string FILE;
@@ -109,8 +106,6 @@ struct InputFileSource {
 namespace InputFiles {
 
 const InputFileSource MARKET_TRADE = {
-  "market_trades",
-  "Mtrades",
   "market_trades.csv",
   MAGIC_VWAP::SourceDataType::TradeCSV,
   {
@@ -121,11 +116,38 @@ const InputFileSource MARKET_TRADE = {
       {QUANTITY,    "quantity"},
       {PRICE,       "price"},
   }
+};
+
+const InputFileSource VWAP_BY_STOCK = {
+  "vwap_by_stock.csv",
+  MAGIC_VWAP::SourceDataType::TradeCSV,
+  {
+      {EPIC,        "epic"},
+      {ISIN,        "isin"},
+      {WVAP,        "WVAP"}
+  }
 }; 
 
-constexpr size_t NUM_DATASETS = 1;
+
+const InputFileSource VWAP_BY_ISIN_TRADE_COMBO = {
+  "vwap_by_ISIN_trade_combo.csv",
+  MAGIC_VWAP::SourceDataType::TradeCSV,
+  {
+     
+      {ISIN,        "isin"},
+      {TRADE_TYPE,  "trade type"},
+      {WVAP,        "WVAP"}
+  }
+};
+
+
+
+
+constexpr size_t NUM_DATASETS = 3;
 
 const InputFileSource DATASETS[NUM_DATASETS] = { MARKET_TRADE,
+                                                  VWAP_BY_STOCK,
+                                                  VWAP_BY_ISIN_TRADE_COMBO
                                                 };
 
 const std::string DATASET_FILE_DIR = "datasets/";

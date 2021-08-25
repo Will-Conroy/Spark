@@ -67,7 +67,7 @@ public:
     double getVWAP(std::string trade_type) const;
 
     
-    std::map<const std::string, const TradeContainer&> getTradesByTypes();
+    std::map<const std::string, const TradeContainer&> getTradesByTypes() const;
 
 
     /*----Setters---*/

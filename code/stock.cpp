@@ -52,7 +52,7 @@ TradeContainer Stock::getTradesByType(std::string type) const{
 };
 
 
-std::map<const std::string, const TradeContainer&> Stock::getTradesByTypes(){
+std::map<const std::string, const TradeContainer&> Stock::getTradesByTypes() const{
     std::map<const std::string,  TradeContainer> tradesBytype;
     
     for(auto const& x : this->trades){
@@ -66,6 +66,7 @@ std::map<const std::string, const TradeContainer&> Stock::getTradesByTypes(){
                 );
         }
     }
+
     std::map<const std::string,  const TradeContainer&> temp;
     for(auto const& x : tradesBytype){
        temp.insert(x);

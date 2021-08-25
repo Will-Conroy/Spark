@@ -29,17 +29,16 @@ const StockContainer& Stocks::getStocks(){
 
 std::map<std::pair<const Stock&, std::string>, double> Stocks::getWVAPByTradeComdo(){
   std::map<std::pair<const Stock&, std::string>, double> out;
-  /*
-    const StockContainer& STOCKS = this->stocks;
-    for (auto const& y : STOCKS)
-    {
-        
-        for (auto const& x : y.second.getTradesByTypes())
-        {
-            out.insert({{y.second, x.first}, cacluateVWAP(x.second)});
-        }
-    }*/
-    return out;
+
+  for (auto const& [isan, stock] : this->stocks)
+  {
+      
+      for (auto const& [type, trades] :  stock.getTradesByTypes())
+      {
+          out.insert({{stock, type}, cacluateVWAP(trades)});
+      }
+  }
+  return out;
 };
 
 

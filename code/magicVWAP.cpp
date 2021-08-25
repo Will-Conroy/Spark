@@ -159,6 +159,7 @@ void saveMenu(Stocks& stocks, MAGIC_VWAP::InputFileSource fileSources){
                     }else if(fileSources.FILE == MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.FILE){
                         saveVWAPByISINTradeComboToCSV(stocks);
                     }
+
                     vwapMenu(stocks);
                     break;
                    
@@ -235,17 +236,20 @@ void saveVWAPByStockToCSV(Stocks& stocks){
 
 
 void saveVWAPByISINTradeComboToCSV(Stocks& stocks){
+
     std::ofstream file;
     file.open (MAGIC_VWAP::InputFiles::DATASET_FILE_DIR + MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.FILE);
-    file << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::EPIC) << ','
-            << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::ISIN) << ','
+    file << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::ISIN) << ','
+            << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::TRADE_TYPE) << ','
              << MAGIC_VWAP::InputFiles::VWAP_BY_ISIN_TRADE_COMBO.COLS.at(MAGIC_VWAP::SourceColumn::WVAP) << std::endl;
 
     for(const auto& [info, vwap]: stocks.getWVAPByTradeComdo()){
         const auto& [isin, trade] = info;
         file << isin << ','  <<  trade << ',' << vwap  << std::endl;
     }
+
     file.close();
+
 };
 
 

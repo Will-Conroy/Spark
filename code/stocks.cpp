@@ -35,7 +35,7 @@ std::map<std::pair<std::string, std::string>, double> Stocks::getWVAPByTradeComd
       
       for (auto const& [type, trades] :  stock.getTradesByTypes())
       {
-         out.insert({{type, stock.getISIN()}, cacluateVWAP(trades)});
+         out.insert({{stock.getISIN(), type}, cacluateVWAP(trades)});
       }
       
   }

@@ -38,7 +38,7 @@ namespace MENU  {
         {
             {EXIT,            Option {"Exit",   3,  ".."}},
             {LOAD,            Option {"Load",   2,  "l"}},
-            {CALCULATE_VWAP,  Option {"VWAP",   1,  "vwap"}},
+            {CALCULATE_VWAP,  Option {"VWAP",   1,  "v"}},
             {SEARCH,          Option {"Search", 0,  "?"}}
 
         }

@@ -5,12 +5,19 @@
 #include <string>
 #include <fstream>
 
+/*
+  Ask the user which file they want to populate the Stocks with.
 
+  @param stocks
+    refence to the Stock object who's data is going to be used
+*/
 
 void populatedStocksFromCommandLine(Stocks& stocks){
     
     bool populated = false;
 
+
+    //Will keep asking until it reseave a legal responce
     do{
         std::cout << "What file do you want to read in:" << std::endl;
        
@@ -49,6 +56,14 @@ void displayVWAPFromCommandLineByISIN(Stocks& stocks){
     std::cout << std::endl;
 };
 
+/*
+  Caculates and then displayes the WVAP for each unquine stock in the Stocks object
+  Out puts the stocsk EPIC, ISIN and VWAP
+
+  @param stocks
+    refence to the Stock object who's data is going to be used
+*/
+
 void displayVWAPPerStock(Stocks& stocks){
     
     std::cout << std::endl << " EPIC " << MENU::DIVIDER << MENU::autoDividers(17, "ISIN") << MENU::autoDividers(11, "VWAP") << std::endl;
@@ -59,11 +74,21 @@ void displayVWAPPerStock(Stocks& stocks){
     std::cout << std::endl;
 };
 
+
+/*
+  Caculates and then displayes the WVAP for each unquine stock, trade refence combo
+  Out puts the stocsk ISIN, trade refence and VWAP
+
+  @param stocks
+    refence to the Stock object who's data is going to be used
+*/
+
 void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks){
     std::string lastISIN = "";
     std::cout << std::endl << MENU::autoDividers(17, "ISIN") << MENU::autoDividers(15, "Trade Type") << MENU::autoDividers(11, "VWAP") << std::endl;
     for(const auto& [info, vwap]: stocks.getWVAPByTradeComdo()){
         const auto& [isin, trade] = info;
+        //Check there is a new ISIN, if there is print a new line for confeance
         if(isin != lastISIN){
             std::cout << std::endl;
             lastISIN = isin;
@@ -73,8 +98,11 @@ void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks){
     std::cout << std::endl;
 };
 
+
+
 void mainMenu(Stocks& stocks){
     bool vaildInput = false;
+
     do{
         std::string userInput = MENU::getInputFromUser(MENU::MAIN);
         try{
@@ -210,6 +238,8 @@ std::string MENU::getInputFromUser(MENU::Menu menu){
         std::cin >>  userInput;
         return userInput;
 };
+
+
 
 std::string MENU::autoDividers(int size, std::string leftText){
     std::string out = leftText;

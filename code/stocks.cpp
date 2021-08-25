@@ -8,6 +8,9 @@ Stock& Stocks::getStock(std::string isin){
 
 };
 
+
+
+
 StockContainer Stocks::getStockByEPIC(std::string epic){
   StockContainer stockOut;
 
@@ -27,6 +30,20 @@ const StockContainer& Stocks::getStocks(){
   return temp;
 };
 
+
+
+
+/*
+  Caculates and formates the WVAP for each unqine trade stock combo.
+
+
+ @returns std::map<std::pair<ISIN, trade type> VWAP>
+    std::map<std::pair<std::string, std::string>
+    where the key is a pair of string the first string being the ISIN, second trade type.
+    The Value is the VWAP
+
+*/
+
 std::map<std::pair<std::string, std::string>, double> Stocks::getWVAPByTradeComdo(){
   std::map<std::pair<std::string, std::string>, double>  out;
 
@@ -42,7 +59,17 @@ std::map<std::pair<std::string, std::string>, double> Stocks::getWVAPByTradeComd
   return out;
 };
 
+/*
+  Given input steam and cols need to be filled.
+  It runs though each line  of the CSV and populate the stocks.
 
+  @param istream
+    isteam for the file that is going to be read in
+
+  @param Cols
+  SourceColumnMapping of what cols are in the file, so what data they can use to populate
+  
+*/
 
 
 void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMapping &cols){
@@ -58,6 +85,7 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
         std::string isan = popStringFormCSVLine(line);
         Stock stock;
         
+        //Check to see if the stock is already there, if it not creates a stock with the correct ISIN and EPIC
         try{
           stock = getStock(isan);
         }
@@ -65,7 +93,7 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
           stock = Stock(epic, isan);
           stocks.insert({isan, stock});
         }
-
+        //Now that it knows there is the correct stocks, it addeds a new trade
         getStock(isan).addTrade({popStringFormCSVLine(line), popStringFormCSVLine(line), atoi( popStringFormCSVLine(line).c_str() ), atof( popStringFormCSVLine(line).c_str() )}); 
     }
     /*
@@ -74,6 +102,19 @@ void Stocks::popluateFormCSV(std::istream& is, const MAGIC_VWAP::SourceColumnMap
       std::cout << newStock;
     }*/
 };  
+
+/*
+  Given refence to a CSV line in the form of a string. 
+  this method, take the first value of the string removing it form the string and returning it.
+
+  @param line
+    a refence to a CSV line in the form of a string
+
+  @return 
+    the first value in the CSV line
+  
+*/
+
 
 std::string Stocks::popStringFormCSVLine(std::string& line){
 

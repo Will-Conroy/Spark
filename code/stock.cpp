@@ -1,6 +1,20 @@
 #include "stock.h"
 #include <iostream>
 
+
+
+/*
+    A helper function that caculates the VWAP given a map of trades
+  @param trades
+    a TradeContainer that store a set of trade that you want the combind VWAP for
+
+
+  @return
+    a double that is the caculated VWAP
+
+*/
+
+
  double cacluateVWAP(const TradeContainer& trades){
     double numerator = 0;
     int denominator = 0;
@@ -19,28 +33,76 @@
     return numerator/denominator;
  };
 
+/*
+  Construct an Stock with a given a EPIC and ISIN
+
+  @param EPIC
+    Short name for the stock
+
+ @param ISIN
+    Long uniqu name for the stock
+
+
+*/
 Stock::Stock(const std::string& epic, std::string& isin): epic(epic), isin(isin){}
 
 /*----Getters----*/
+
+/*
+  Gets the epic of the stock
+
+ @return EPIC
+    string of the epic
+*/
 std::string Stock::getEpic() const{
     return this->epic;
 };
 
+/*
+  Gets the epic of the stock
+
+ @return ISIN
+    string of the isin
+*/
 std::string Stock::getISIN() const{
     return this->isin;
 };
 
+/*
+  Return a Trade struct given a trade refence
+
+  @param trade_ref
+    a trades refence in the form of a string
+
+ @returns Trade 
+    value return of a trade
+
+*/
+
 Trade Stock::getTrade(std::string trade_ref) const{
     
-    Trade const trade = this->trades.at(trade_ref);
-    return  trade;
+    
+    return  this->trades.at(trade_ref);
     
 };
+
+
 
 TradeContainer Stock::getTrades() const{
     return this->trades;
 };
 
+/*
+  For each given type of trade for this stock, it return off of those trade 
+
+  @param trade type
+    Short name for the stock
+
+ @return TradeContainer
+        Containing all trades of that type
+
+
+*/
 
 TradeContainer Stock::getTradesByType(std::string type) const{
     TradeContainer tradesByType;
@@ -52,10 +114,20 @@ TradeContainer Stock::getTradesByType(std::string type) const{
 };
 
 
+/*
+  For each unquie type of trade a TradeContainer is return with all of those trades 
+
+ @return std::map<const std::string, const TradeContainer&>
+    Key is a string indacting the type of trade
+    Value is TradeContainer with all of the given trade in
+*/
+
 std::map<const std::string, const TradeContainer&> Stock::getTradesByTypes() const{
     std::map<const std::string,  TradeContainer> tradesBytype;
     
     for(auto const& x : this->trades){
+        //checks if this type of trade has already been added
+        //if it hasn't creates a new tradcontaner
         try{
             tradesBytype.at(x.second.trade_type).insert(x);
         }catch(std::out_of_range& e){
@@ -98,7 +170,6 @@ double Stock::getVWAP() const {
 
             }
         }
-
         if(denominator == 0)
         {
             return 0;

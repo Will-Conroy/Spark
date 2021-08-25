@@ -4,7 +4,8 @@
 #include <map>
 
     
-
+    //Trade struct store all the data for a trade
+    //This is the equivalt one line of the given CSV
     struct Trade{
         
         //Unique code for each transaction
@@ -58,7 +59,7 @@ public:
 
     TradeContainer getTrades() const;
 
-    TradeContainer getTradesByType(std::string type) const;
+    
     
     //get the VWAP for all trades of this stock
     double getVWAP() const;
@@ -66,10 +67,12 @@ public:
     //get the VWAP for all trades of given type for this stock
     double getVWAP(std::string trade_type) const;
 
-    
+    //gets all the trade of each type
     std::map<const std::string, const TradeContainer&> getTradesByTypes() const;
-
-
+    
+    //get all the trades of one given type
+    TradeContainer getTradesByType(std::string type) const;
+    
     /*----Setters---*/
     void addTrade(std::string trade_ref, std::string trade_type, int quantity, double price);
     void addTrade(Trade trade);

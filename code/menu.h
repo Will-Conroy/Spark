@@ -4,13 +4,19 @@
 
 /*
 
-  This file contains declarations for the menus. 
+
+  This file contains information about menus.
+  Namely the layout of the menus.
  
  */
 
 
 namespace MENU  {
 
+    /*
+        Lots of menus will have similer options that will be slightly different in the context of the particalur menu.
+
+    */
     enum Options {
             EXIT,
             SEARCH,
@@ -27,14 +33,19 @@ namespace MENU  {
 
     struct Option{
         const std::string NAME;
+        //unqine int code for user to input to select the  option
         const int CODE;
+        //unqine short string user to inpot to select the option
         const std::string ABBREVIATION;
     };
 
     using OptionMapings = std::unordered_map<Options, Option>;
 
+    //this struct store the input for all option the menu has
     struct Menu {
+        //Title to inform the user
         const std::string TITLE;
+
         const OptionMapings OPTIONS;
     };
 
@@ -75,10 +86,16 @@ namespace MENU  {
                                     VWAP
                                                 };
 
+    //Divered for colums in tables and different options. changing this will change the look of the full program
     const std::string DIVIDER = " | ";
 
+
+    //Give a user input returns the option that it maps too
     Options getOption(OptionMapings options, std::string input);
+    //get the users input, check if it is valid can clean it up.
     std::string getInputFromUser(Menu menu);
+
+    //user to make usre that tables are the equal size
     std::string autoDividers(int size, std::string leftText);
 }
 #endif // MENU_H_

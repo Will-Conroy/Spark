@@ -39,26 +39,36 @@ void populatedStocksFromCommandLine(Stocks& stocks){
 
 
 void displayVWAPFromCommandLineByISIN(Stocks& stocks){
-    std::cout << "ISIN:" << std::endl;
+    std::cout << std::endl << "ISIN:" << std::endl;
     std::string isin;
     std::cin >> isin;
     std::cout << stocks.getStock(isin).getVWAP();
+    std::cout << std::endl;
 };
 
 void displayVWAPPerStock(Stocks& stocks){
-    std::cout << " EPIC  |      ISIN      |#tr | VWAP" << std::endl;
-    std::cout << stocks;
+    
+    std::cout << std::endl << " EPIC " << MENU::DIVIDER << MENU::autoDividers(17, "ISIN") << MENU::autoDividers(11, "VWAP") << std::endl;
+    
+    for(const auto& [isin, stock] : stocks.getStocks()){
+        std::cout << stock.getEpic() << MENU::DIVIDER << isin << MENU::DIVIDER << MENU::autoDividers(11, std::to_string(stock.getVWAP()))<< std::endl << std::endl;
+    }
+    std::cout << std::endl;
 };
 
 void displayVWAPromCommandLineByISINTradeCombo(Stocks& stocks){
-    
+    std::string lastISIN = "";
+    std::cout << std::endl << MENU::autoDividers(17, "ISIN") << MENU::autoDividers(15, "Trade Type") << MENU::autoDividers(11, "VWAP") << std::endl;
+    for(const auto& [info, vwap]: stocks.getWVAPByTradeComdo()){
+        const auto& [isin, trade] = info;
+        if(isin != lastISIN){
+            std::cout << std::endl;
+            lastISIN = isin;
+        }
+        std::cout << isin << MENU::DIVIDER  << MENU::autoDividers(15, trade) << MENU::autoDividers(10, std::to_string(vwap)) << std::endl;
+    }
+    std::cout << std::endl;
 };
-
-
-
-
-
-
 
 void mainMenu(Stocks& stocks){
     bool vaildInput = false;
@@ -144,6 +154,9 @@ void vwapMenu(Stocks& stocks){
                     break;
                     
                 case MENU::TRADE_TYPE:
+                    displayVWAPromCommandLineByISINTradeCombo(stocks);
+                    vwapMenu(stocks);
+                    break;
                    
                 case MENU::ISIN:
                     displayVWAPPerStock(stocks);
@@ -158,9 +171,7 @@ void vwapMenu(Stocks& stocks){
         }catch(std::out_of_range& e){
             std::cout << e.what() << std::endl;
         }
-
     }while(!vaildInput);
-
 }
 
 
@@ -197,3 +208,13 @@ std::string MENU::getInputFromUser(MENU::Menu menu){
         std::cin >>  userInput;
         return userInput;
 };
+
+std::string MENU::autoDividers(int size, std::string leftText){
+    std::string out = leftText;
+    int difference = size - ( leftText + MENU::DIVIDER).size();
+    for(int i = difference; i > 0; i--){
+        out += ' ';
+    }
+    return out + MENU::DIVIDER;
+};
+

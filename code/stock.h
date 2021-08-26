@@ -48,7 +48,7 @@ public:
     /*----Constructors----*/
     Stock() = default;
 
-    Stock(const std::string& epic, std::string& isin);
+    Stock(const std::string& epic, const std::string& isin);
 
     /*----Getters----*/
     std::string getEpic() const;

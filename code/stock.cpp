@@ -44,7 +44,7 @@
 
 
 */
-Stock::Stock(const std::string& epic, std::string& isin): epic(epic), isin(isin){}
+Stock::Stock(const std::string& epic, const std::string& isin): epic(epic), isin(isin){}
 
 /*----Getters----*/
 

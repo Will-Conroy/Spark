@@ -279,7 +279,6 @@ void saveVWAPByISINTradeComboToCSV(Stocks& stocks){
     }
 
     file.close();
-
 };
 
 
